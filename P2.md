@@ -71,11 +71,13 @@ I chose source and destination points from a test image with straight lanes. The
 | 203, 720      | 320, 720      |
 | 1106, 720     | 960, 720      |
 | 702, 460      | 960, 0        |
+
 ![Select 4 source points][image4]
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto the test image and its warped counterpart to verify that the lines appear parallel in the warped image. Warping is done by using `cv2.warpPerspective()`.
 
 ![][image5]
+
 ![warped binary image][image6]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
@@ -89,6 +91,7 @@ The code for this step are in the 3 functions below:
 `Pipeline.fit_polynomial()`:  I fit a 2nd order polynomial to the detected lane pixels (either from 		`find_lane_pixels()` or `search_around_poly()`). I also did quality control with this logic: we should have left and right curvatures in a similar range of magnitude (ratio within `0.05-20`), and we should have left and right curves have the same sign for `a` for `ax^2+bx+c`. Otherwise, we reset to use sliding window for the next frame.
 
 An example of the sliding window output is shown below:
+
 ![][image7]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
@@ -99,8 +102,11 @@ The code for this step is in `Pipeline.measure_curvature_real()`.
 
 The code for this step is in `Pipeline.setup_visualization()`.
 An example of the detected road region is shown below:
+
 ![][image8]
+
 Here is a final output of my result on the test image:
+
 ![final result][image9]
 
 ---
